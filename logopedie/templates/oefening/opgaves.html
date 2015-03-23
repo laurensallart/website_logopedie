@@ -1,0 +1,40 @@
+{% extends 'oefening/base.html' %}
+
+{% block title %}
+    Opgaves
+{% endblock %}
+
+{% block body_block %}
+    
+    <h1>Opgaves</h1>
+    
+    <div class="container">
+	    <div class="row">
+				
+				{% for opgave in opgaves %}
+				<div class="col-sm-6 col-md-4">
+					<div class="panel panel-default">
+						<div class="panel-heading">
+							<a data-toggle="collapse" data-parent="#accordion" href=#{{opgave.name}} aria-expanded="false" aria-controls={{opgave.name}}><h4 class="blacktext">{{opgave.name}}</h4>
+							</a>
+						</div>
+						<div id={{opgave.name}} class="panel-collapse collapse out" role="tabpanel" aria-labelledby={{opgave.name}}>
+							<div class="panel-body">
+								<h3>{{opgave.question}}</h3>
+								<img src="/media/{{opgave.picture}}" alt="/oefening/media/{{opgave.picture}}" class="img-responsive">
+								<ul class="list-group">
+									<li class="list-group-item ">{{opgave.optie1}}</li>
+									<li class="list-group-item ">{{opgave.optie2}}</li>
+									<li class="list-group-item ">{{opgave.optie3}}</li>
+									<li class="list-group-item ">{{opgave.optie4}}</li>
+								</ul>
+								
+							</div>
+						</div>
+					</div>
+				</div>
+				{% endfor %}
+			
+		</div>
+	</div>
+{% endblock %}

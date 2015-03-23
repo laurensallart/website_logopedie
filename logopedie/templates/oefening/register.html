@@ -1,0 +1,49 @@
+{% extends 'oefening/base.html' %}
+
+{% block title %}
+    Register
+{% endblock %}
+
+
+{% block body_block %}
+<div class="jumbotron">
+    <h1>Register</h1>
+    <br />
+
+    <div class="container">
+        {% if registered %}
+        <p>Thank you for registering.</p>
+
+        <p><a href="/oefening/login/">Login</a></p>
+        {% else %}
+        <form id="user_form" method="post" action="/oefening/register/"
+              enctype="multipart/form-data">
+            {% csrf_token %}
+            
+            <!-- Display each form here -->
+            <strong>Username: </strong> <input type="text" class="form-control" placeholder="Username" name="username" value="" size="50" />
+            <br />
+            <strong>Email: </strong> <input type="text" class="form-control" placeholder="Email" name="email" value="" size="50" />
+            <br />
+            <strong>Password: </strong> <input type="password" class="form-control" placeholder="Password" name="password" value="" size="50" />
+            <br />
+            
+           
+
+            {% for field in profile_form.visible_fields %}
+            {{ field.errors }}
+            <strong>{{ field.help_text }}</strong><br />
+
+            {{ field }}<br />
+            {% endfor %}
+
+            
+            <br />
+            <!-- Provide a button to click to submit the form. -->
+            <input class="btn btn-custom" type="submit" name="submit" value="Register"/>
+        </form>
+        {% endif %}
+    </div>
+</div>
+{% endblock %}
+

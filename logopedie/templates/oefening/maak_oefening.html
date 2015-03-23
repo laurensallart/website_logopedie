@@ -1,0 +1,37 @@
+{% extends 'oefening/base.html' %}
+
+{% block title %}
+    oefening
+{% endblock %}
+
+{% block body_block %}
+    
+	
+	<form class="form-signin span12" id="answer_form" method="post" action="/oefening/maak_oefening/{{child.slug}}/{{reeks.slug}}/{{resultaat.id}}/{{count}}/">
+        <h2 class="form-signin-heading">{{opgave.question}}</h2>
+        {% csrf_token %}
+		<div class='container'>
+			<div class='row'>
+				<div class="col-sm-12 col-md-6">
+					<img src="/media/{{opgave.picture}}" alt="" class='img-responsive' >
+				</div>
+				<div class="col-sm-12 col-md-6">
+					<label class="radio"><input type="radio" name="answer" value=1 >{{opgave.optie1}}</label>
+				    <label class="radio"><input type="radio" name="answer" value=2 >{{opgave.optie2}}</label>
+				    <label class="radio"><input type="radio" name="answer" value=3 >{{opgave.optie3}}</label>
+				    <label class="radio"><input type="radio" name="answer" value=4 >{{opgave.optie4}}</label>
+				    <button class="btn btn-custom" type="submit">next</button>
+				</div>
+			</div>
+		</div>
+		
+	    
+	  
+
+        
+    </form>
+
+{% endblock %}
+
+
+

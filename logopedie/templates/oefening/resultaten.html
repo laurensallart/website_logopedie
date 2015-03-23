@@ -1,0 +1,82 @@
+{% extends 'oefening/base.html' %}
+
+{% block title %}
+    resultaten
+{% endblock %}
+
+{% block body_block %}
+    <h1>{{ child_userName }}</h1>
+    {% if child %}
+        {% if resultaten %}
+        
+        <ul class='list-group'>
+            {% for resultaat in resultaten %}
+            {% if resultaat.ended %}
+            <li class="list-group-item">
+                <strong>reeks: </strong> {{resultaat.oefeningenreeks}} <br>
+                <strong>resultaat: </strong> {{ resultaat.grade }} / {{resultaat.total}} 
+                <p>{{resultaat.date}}</p>
+                
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <a data-toggle="collapse" data-parent="#accordion" href=#info aria-expanded="false" aria-controls=info><h4 class="blacktext">meer info</h4>
+                    </div>
+                    <div id=info class="panel-collapse collapse out" role="tabpanel" aria-labelledby=info>
+                        <div class="panel-body">
+                            <div class='container'>
+                                <div class='row'> 
+                                    {% for answer in resultaat.answers.all %} 
+                                 
+                                    <div class="col-sm-12 col-md-5">
+                                        {% if answer.correct%}
+                                        <div class="panel panel-success">
+                                            <div class="panel-heading">
+                                        {% else %}
+                                        <div class="panel panel-danger">
+                                            <div class="panel-heading redpanel">
+                                        {% endif %}
+                                            
+                                                <a data-toggle="collapse" data-parent="#accordion" href=#{{answer.id}}{{answer.opgave.slug}} aria-expanded="false" aria-controls={{answer.id}}{{answer.opgave.slug}}><h4 class="blacktext">{{answer.opgave.name}}</h4>
+                                                </a>
+                                            </div>
+                                            <div id={{answer.id}}{{answer.opgave.slug}} class="panel-collapse collapse out" role="tabpanel" aria-labelledby={{answer.id}}{{answer.opgave.slug}}>
+                                                <div class="panel-body">
+                                                    <h3>{{answer.opgave.question}}</h3>
+                                                    <img src="/media/{{answer.opgave.picture}}" alt="/oefening/media/{{answer.opgave.picture}}" class="img-responsive">
+                                                    <ul class="list-group">
+                                                        <li class="list-group-item {% if answer.correct%}{% else %}c1{{answer.answer}}{% endif %}">{{answer.opgave.optie1}}</li>
+                                                        <li class="list-group-item {% if answer.correct%}{% else %}c2{{answer.answer}}{% endif %}">{{answer.opgave.optie2}}</li>
+                                                        <li class="list-group-item {% if answer.correct%}{% else %}c3{{answer.answer}}{% endif %}">{{answer.opgave.optie3}}</li>
+                                                        <li class="list-group-item {% if answer.correct%}{% else %}c4{{answer.answer}}{% endif %}">{{answer.opgave.optie4}}</li>
+                                                    </ul>
+                                                    
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                 
+                                    {% endfor %}    
+                               </div>
+                                    
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                
+                        
+                    
+            </li>
+            {% endif %}
+            {% endfor %}
+        </ul>
+        {% else %}
+            <strong>Er zijn geen resultaten beschikbaar voor deze cliënt</strong>
+        {% endif %}
+    {% else %}
+        {{ child_userName }} bestaat niet!
+    {% endif %}
+{% endblock %}
+
+

@@ -1,0 +1,29 @@
+{% extends 'oefening/base.html' %}
+{% load bootstrap3 %}
+
+{% block title %}
+    Add a child
+{% endblock %}
+
+{% block body_block %}
+    <h1>Create client</h1>
+
+    <form id="child_form" method="post" action="/oefening/add_child/" enctype="multipart/form-data">
+
+        {% csrf_token %}
+        {% for hidden in form.hidden_fields %}
+            {{ hidden }}
+        {% endfor %}
+
+        {% for field in form.visible_fields %}
+            <p>{{ field.errors }}
+            <strong>{{ field.help_text}} </strong>
+            {% bootstrap_field field layout='inline' %} 
+            </p> 
+        {% endfor %}
+        <input class="btn btn-custom" type="submit" name="submit" value="Create Child"/>
+    </form>
+{% endblock %}
+
+
+

@@ -1,0 +1,31 @@
+{% extends 'oefening/base.html' %}
+
+{% block title %}{{ child.userName }}{% endblock %}
+
+{% block body_block %}
+    
+    {% if child %}
+
+    <div class="jumbotron">
+        <h1>{{ child.firstName }} {{child.lastName}} </h1>
+        <p>age: {{child.age}}</p>
+        <div class="mask ">
+            <img src="/media/{{child.picture}}"  height="200" width="200" />
+            
+        </div>​
+
+    </div>
+
+    <a href="/oefening/child/{{child.slug}}/show_reeksen" class="btn btn-custom" role="button">start oefening</a><br>
+    <p></p>
+    <a href="/oefening/child/{{child.slug}}/resultaten" class="btn btn-custom" role="button">resultaten</a>
+        
+     
+        
+    {% else %}
+        The specified child {{ child_userName }} does not exist!
+    {% endif %}
+{% endblock %}
+
+
+

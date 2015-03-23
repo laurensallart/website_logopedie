@@ -1,0 +1,116 @@
+{% load staticfiles %}
+<!DOCTYPE html>
+
+<html>
+    <head>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+	    <!-- Bootstrap -->
+	    
+	    <link href="{% static 'css/bootstrap.min.css' %}" rel="stylesheet" media="screen">
+	    <link href="{% static 'css/bootstrap-responsive.css' %}" rel="stylesheet">
+	    <link href="{% static 'css/bootstrap-fluid-adj.css' %}" rel="stylesheet">
+	    <link rel="stylesheet" href="{% static 'css/custom.css' %}">
+		
+        <title>Logopedie - {% block title %}Welkom{% endblock %}</title>
+    </head>
+
+    <body>
+        <nav class="navbar navbar-custom navbar-fixed-top">
+        	<div class="container-fluid">
+	        	<div class="navbar-header">
+			    	<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+				        <span class="sr-only">Toggle navigation</span>
+				        <span class="icon-bar"></span>
+				        <span class="icon-bar"></span>
+				        <span class="icon-bar"></span>
+			        </button>
+			        <a class="navbar-brand" href="/oefening">Logopedie</a>
+	    		</div>
+	    		<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+					<ul class="nav navbar-nav">
+						{% if user.is_authenticated %}
+	                    <li class="dropdown">
+				          	<a  href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Create <span class="caret"></span></a>
+				          	<ul class="dropdown-menu" role="menu">
+					            <li><a href="/oefening/add_child/">Create cliënt</a><br /></li>
+	                    		<li><a href="/oefening/add_opgave/">Create opgave</a><br /></li>
+	                    		<li><a href="/oefening/add_reeks/">Create reeks</a><br /></li>	    
+				          	</ul>
+				        </li>
+				        <li>
+				        	<a href="/oefening/opgaves">Opgaves</a>
+
+				        </li>
+				        <li>
+				        	<a href="/oefening/reeksen">Reeksen</a>
+				        </li>
+	                        				
+	                   {% endif %}
+					</ul>
+					<ul class="nav navbar-nav navbar-right">
+						{% if user.is_authenticated %}
+	                    <li class="navbar-text">Welcome, {{ user.username }}!</li>
+	                    <li><a href="/oefening/logout">logout</a></li>
+	                   {% else %}
+	                    <li><a href="/oefening/register/">Register Here</a></li>
+	   					<li><a href="/oefening/login/">Login</a></li>
+	                   {% endif %}
+					</ul>
+	    		</div>
+    		</div>	
+        </nav>
+
+        
+
+		<div class="container-fluid">
+		    <div class="row-fluid">
+		        <div class="span2">
+		            {% if user.is_authenticated %}
+		            	<div class="well sidebar-nav">
+		                
+			                {% include "oefening/children_list.html" %}
+			                {% block sidebar %}					
+						    {% endblock %}
+						    
+						    <div id="children">
+						        
+						        <p>
+						        	{% if children_list %}
+						            <ul class="nav nav-list"><li>Children List</li></ul>
+						            
+						            {% include 'oefening/children_list.html' with children_list=children_list %}
+						        	{% endif %}
+						        </p>
+						        
+						    </div> 
+						
+		            	</div>
+		            {% endif %}
+		            <!--/.well -->
+		        </div>
+		        <!--/span-->
+		        <div class="span9">
+		            {% block body_block %}
+		            {% endblock %}
+		        </div>
+		        <!--/span-->
+		    </div>
+		    <!--/row-->
+		</div>
+		<!--/.fluid-container-->
+		<hr>
+
+
+        
+        <script src="{% static 'js/jquery-2.1.3.js' %}"></script>
+    	<script src="{% static 'js/bootstrap.min.js' %}"></script>
+    	<script src="{% static 'js/oefening-ajax.js' %}"></script>
+    	
+    </body>
+
+    <footer>
+	    <div class="container">
+	        <p>&copy; Logopedie</p>
+	    </div>
+	</footer>
+</html>

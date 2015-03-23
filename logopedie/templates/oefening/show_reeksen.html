@@ -1,0 +1,73 @@
+{% extends 'oefening/base.html' %}
+
+{% block title %}
+    reeksen
+{% endblock %}
+
+{% block body_block %}
+    <h1>{{ child.userName }}</h1>
+    <div class="container">
+        <div class="row">
+            {% for reeks in reeksen %}  
+                
+                <div class="col-sm-12 col-md-6">
+                    <div class="panel panel-default">
+                        
+                        <div class="panel-heading clearfix">
+                            
+                                <a class="blacktext pull-left" data-toggle="collapse" data-parent="#accordion" href=#{{reeks.slug}} aria-expanded="false" aria-controls={{opgave.slug}}>
+                                    <h4 class="panel-title">
+                                        {{reeks.name}}
+                                    </h4> 
+                                </a>
+                                <a href="/oefening/child/{{child.slug}}/{{reeks.slug}}" class="btn btn-default pull-right" role="button">
+                                    Kies
+                                </a>
+                        </div>
+                        <div id={{reeks.slug}} class="panel-collapse collapse out" role="tabpanel" aria-labelledby={{reeks.slug}}>
+                            <div class="panel-body">
+                                <h3>Oefeningen</h3>
+                                
+                                
+                                    {% for opgave in reeks.oefeningen.all %}
+                                    
+                                        <div class="panel panel-default">
+                                            <div class="panel-heading">
+                                                <a class="blacktext" data-toggle="collapse" data-parent="#accordion" href=#{{reeks.slug}}{{opgave.slug}} aria-expanded="false" aria-controls={{reeks.slug}}{{opgave.slug}}>{{opgave.name}}
+                                                </a>
+                                            </div>
+                                            <div id={{reeks.slug}}{{opgave.slug}} class="panel-collapse collapse out" role="tabpanel" aria-labelledby={{reeks.slug}}{{opgave.slug}}>
+                                                <div class="panel-body">
+                                                    <h3>{{opgave.question}}</h3>
+                                                    <img src="/media/{{opgave.picture}}" alt="/oefening/media/{{opgave.picture}}" class="img-responsive">
+                                                    <ul class="list-group">
+                                                        <li class="list-group-item ">{{opgave.optie1}}</li>
+                                                        <li class="list-group-item ">{{opgave.optie2}}</li>
+                                                        <li class="list-group-item ">{{opgave.optie3}}</li>
+                                                        <li class="list-group-item ">{{opgave.optie4}}</li>
+                                                    </ul>
+                                                    
+                                                </div>
+                                            </div>
+                                        </div>
+                                    
+                                    {% endfor %}
+                                
+                                
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+            {% endfor %}
+        </div>
+    </div>
+
+
+
+
+
+    
+{% endblock %}
+
+

@@ -1,0 +1,26 @@
+<ul class="nav nav-list">
+    {% if children %}
+        <h3 align='center'>Cliënten</h3>
+        <ul class="list-group">
+            {% for child in children %}
+            <!-- Following line changed to add an HTML hyperlink -->
+            
+            
+				<div class="mask block-center">
+				    <a href="/oefening/child/{{ child.slug }}"><img src="/media/{{child.picture}}" align="center" height="200" width="200" class="img-center"/></a>
+                    
+				</div>​
+
+				<div class="centered-text">
+					<a href="/oefening/child/{{ child.slug }}" class="btn btn-custom" role="button">{{ child.firstName }} {{child.lastName}}</a>
+				</div>
+				<p></p>
+            	
+            	
+            
+            {% endfor %}
+        </ul>
+    {% else %}
+        <strong>There are no children present.</strong>
+    {% endif %}
+</ul>

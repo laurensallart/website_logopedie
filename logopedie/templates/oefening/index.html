@@ -1,0 +1,29 @@
+{% extends 'oefening/base.html' %}
+
+{% block title %}
+    {% if user.is_authenticated %}
+    {{ user.username }}
+    {% else %}
+    Index
+    {% endif %}
+{% endblock %}
+
+{% block body_block %}
+    <div class="jumbotron">
+        {% if user.is_authenticated %}
+        <h1>hello {{ user.username }}!</h1>
+        <p>Om te starten kan je zelf een opgave of een cliënt creëren.</p>
+        <p>Kies links een cliënt om een oefening te starten of om zijn of haar resultaten te bekijken.</p>
+        <strong>Have fun!</strong>
+        {% else %}
+        <h1>Registreer of log in om verder te gaan</h1>
+        {% endif %}
+    </div>
+
+    
+    <!--/row-->
+    
+{% endblock %}
+
+
+

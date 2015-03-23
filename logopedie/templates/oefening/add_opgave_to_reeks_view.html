@@ -1,0 +1,105 @@
+{% extends 'oefening/base.html' %}
+
+{% block title %}
+    {{reeks_name}}
+{% endblock %}
+
+{% block body_block %}
+    <h1>{{ reeks_name }}</h1>
+    <div class='container'>
+        <div class='row'>
+            <div class='col-sm-12 col-md-6'>
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        {% if reeks %}
+                        <h3 class="panel-title">opgaves die momenteel in de reeks zitten:</h3>
+                        {% else %}
+                        <h3 class="panel-title">The specified reeks {{ reeks_name }} does not exist!</h3>
+                        {% endif %}
+                    </div>
+                    <div class="panel-body">
+                        {% if opgaves_reeks %}
+                            {% for opgave in opgaves_reeks %}
+                            <div>
+                                <div class="panel panel-default">
+                                    <div class="panel-heading clearfix">
+                                        <a class="panel-title pull-left" data-toggle="collapse" data-parent="#accordion" href=#{{opgave.slug}} aria-expanded="false" aria-controls={{opgave.slug}}><h4 class="blacktext">{{opgave.name}}</h4>
+                                        </a>
+                                        <a class="btn btn-danger pull-right" href="/oefening/delete_opgave_from_reeks/{{reeks.slug}}/{{opgave.slug}}" role="button">Delete </a>
+                                    </div>
+                                    <div id={{opgave.slug}} class="panel-collapse collapse out" role="tabpanel" aria-labelledby={{opgave.slug}}>
+                                        <div class="panel-body">
+                                            <h3>{{opgave.question}}</h3>
+                                            <img src="/media/{{opgave.picture}}" alt="/oefening/media/{{opgave.picture}}" class="img-responsive">
+                                            <ul class="list-group">
+                                                <li class="list-group-item ">{{opgave.optie1}}</li>
+                                                <li class="list-group-item ">{{opgave.optie2}}</li>
+                                                <li class="list-group-item ">{{opgave.optie3}}</li>
+                                                <li class="list-group-item ">{{opgave.optie4}}</li>
+                                            </ul>
+                                            
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            {% endfor %}
+                        {% else %}
+                            <strong>Geen opgaves momenteel in de reeks</strong>
+                        {% endif %}
+                    </div>
+                </div>
+            </div>
+            <div class='col-sm-12 col-md-6'>
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        {% if reeks %}
+                        <h3 class="panel-title">opgaves die momenteel nog niet in de reeks zitten</h3>
+                        {% else %}
+                        <h3 class="panel-title">The specified reeks {{ reeks_name }} does not exist!</h3>
+                        {% endif %}
+                    </div>
+                    <div class="panel-body">
+                        {% if opgaves_unused %}
+                        <ul>
+                            {% for opgave in opgaves_unused %}
+                            <div>
+                                <div class="panel panel-default">
+                                    <div class="panel-heading clearfix">
+                                        <a class='pull-left' data-toggle="collapse" data-parent="#accordion" href=#{{opgave.slug}} aria-expanded="false" aria-controls={{opgave.slug}}><h4 class="blacktext">{{opgave.name}}</h4>
+                                        </a>
+                                        <a class="btn btn-default pull-right" href="/oefening/add_opgave_to_reeks/{{reeks.slug}}/{{opgave.slug}}" role="button">Add </a>
+                                    </div>
+                                    <div id={{opgave.slug}} class="panel-collapse collapse out" role="tabpanel" aria-labelledby={{opgave.slug}}>
+                                        <div class="panel-body">
+                                            <h3>{{opgave.question}}</h3>
+                                            <img src="/media/{{opgave.picture}}" alt="/oefening/media/{{opgave.picture}}" class="img-responsive">
+                                            <ul class="list-group">
+                                                <li class="list-group-item ">{{opgave.optie1}}</li>
+                                                <li class="list-group-item ">{{opgave.optie2}}</li>
+                                                <li class="list-group-item ">{{opgave.optie3}}</li>
+                                                <li class="list-group-item ">{{opgave.optie4}}</li>
+                                            </ul>
+                                            
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            {% endfor %}
+                        </ul>
+                        {% else %}
+                            <strong>Geen opgaves die niet in de reeks voor komen</strong>
+                        {% endif %}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    
+
+    
+{% endblock %}
+
+
+
