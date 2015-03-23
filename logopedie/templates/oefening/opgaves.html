@@ -15,10 +15,10 @@
 				<div class="col-sm-6 col-md-4">
 					<div class="panel panel-default">
 						<div class="panel-heading">
-							<a data-toggle="collapse" data-parent="#accordion" href=#{{opgave.name}} aria-expanded="false" aria-controls={{opgave.name}}><h4 class="blacktext">{{opgave.name}}</h4>
+							<a data-toggle="collapse" data-parent="#accordion" href=#{{opgave.slug}} aria-expanded="false" aria-controls={{opgave.slug}}><h4 class="blacktext">{{opgave.name}}</h4>
 							</a>
 						</div>
-						<div id={{opgave.name}} class="panel-collapse collapse out" role="tabpanel" aria-labelledby={{opgave.name}}>
+						<div id={{opgave.slug}} class="panel-collapse collapse out" role="tabpanel" aria-labelledby={{opgave.slug}}>
 							<div class="panel-body">
 								<h3>{{opgave.question}}</h3>
 								<img src="/media/{{opgave.picture}}" alt="/oefening/media/{{opgave.picture}}" class="img-responsive">
